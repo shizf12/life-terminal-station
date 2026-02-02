@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生命终点站 - 临终关怀应用</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar">
+            <div class="nav-brand">🕯️ 生命终点站</div>
+            <ul class="nav-links">
+                <li><a href="#home" class="active">首页</a></li>
+                <li><a href="#will">遗嘱管理</a></li>
+                <li><a href="#belongings">遗物整理</a></li>
+                <li><a href="#funeral">葬礼规划</a></li>
+                <li><a href="#letters">告别信</a></li>
+                <li><a href="#medical">医疗预嘱</a></li>
+            </ul>
+        </nav>
+
+        <main class="main-content">
+            <!-- 首页 - 生命倒计时 -->
+            <section id="home" class="page active">
+                <div class="hero-section">
+                    <h1>生命的倒计时</h1>
+                    <div class="countdown-container">
+                        <div class="countdown-item">
+                            <span id="years" class="countdown-number">0</span>
+                            <span class="countdown-label">年</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span id="months" class="countdown-number">0</span>
+                            <span class="countdown-label">月</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span id="days" class="countdown-number">0</span>
+                            <span class="countdown-label">天</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span id="hours" class="countdown-number">0</span>
+                            <span class="countdown-label">时</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span id="minutes" class="countdown-number">0</span>
+                            <span class="countdown-label">分</span>
+                        </div>
+                    </div>
+                    <div class="life-settings">
+                        <button id="setLifeExpectancy" class="btn-primary">设置预期寿命</button>
+                    </div>
+                </div>
+
+                <div class="quick-actions">
+                    <h2>快速开始</h2>
+                    <div class="action-grid">
+                        <div class="action-card" data-page="will">
+                            <div class="action-icon">📜</div>
+                            <h3>立遗嘱</h3>
+                            <p>规划财产分配，让心意传承</p>
+                        </div>
+                        <div class="action-card" data-page="belongings">
+                            <div class="action-icon">📦</div>
+                            <h3>整理遗物</h3>
+                            <p>分类整理，指定归属</p>
+                        </div>
+                        <div class="action-card" data-page="funeral">
+                            <div class="action-icon">⚰️</div>
+                            <h3>葬礼规划</h3>
+                            <p>安排身后事，从容告别</p>
+                        </div>
+                        <div class="action-card" data-page="letters">
+                            <div class="action-icon">✉️</div>
+                            <h3>告别信</h3>
+                            <p>给爱的人留下最后的话</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 遗嘱管理 -->
+            <section id="will" class="page">
+                <div class="page-header">
+                    <h1>📜 遗嘱管理</h1>
+                    <p>清晰规划财产分配，确保心愿得以实现</p>
+                </div>
+                
+                <div class="content-grid">
+                    <div class="form-section">
+                        <h2>创建遗嘱</h2>
+                        <form id="willForm">
+                            <div class="form-group">
+                                <label>遗嘱标题</label>
+                                <input type="text" id="willTitle" placeholder="例如：我的最后心愿" required>
+                            </div>
+                            <div class="form-group">
+                                <label>财产清单</label>
+                                <textarea id="willAssets" placeholder="列出您的财产：房产、存款、股票、珠宝等..." rows="4"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>受益人分配</label>
+                                <textarea id="willBeneficiaries" placeholder="指定受益人及分配比例..." rows="4"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>特别嘱托</label>
+                                <textarea id="willSpecial" placeholder="其他特殊要求或嘱托..." rows="3"></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary">保存遗嘱</button>
+                                <button type="button" id="clearWill" class="btn-secondary">清空</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="list-section">
+                        <h2>我的遗嘱</h2>
+                        <div id="willList" class="card-list">
+                            <!-- 动态生成的遗嘱列表 -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 遗物整理 -->
+            <section id="belongings" class="page">
+                <div class="page-header">
+                    <h1>📦 遗物整理</h1>
+                    <p>整理物品，指定归属，传递情感</p>
+                </div>
+                
+                <div class="content-grid">
+                    <div class="form-section">
+                        <h2>添加遗物</h2>
+                        <form id="belongingForm">
+                            <div class="form-group">
+                                <label>物品名称</label>
+                                <input type="text" id="itemName" placeholder="例如：老照片相册" required>
+                            </div>
+                            <div class="form-group">
+                                <label>物品类别</label>
+                                <select id="itemCategory">
+                                    <option value="documents">证件文件</option>
+                                    <option value="valuables">贵重物品</option>
+                                    <option value="mementos">纪念品</option>
+                                    <option value="electronics">电子产品</option>
+                                    <option value="clothing">衣物</option>
+                                    <option value="other">其他</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>存放位置</label>
+                                <input type="text" id="itemLocation" placeholder="例如：卧室衣柜上层">
+                            </div>
+                            <div class="form-group">
+                                <label>指定接收人</label>
+                                <input type="text" id="itemRecipient" placeholder="例如：女儿小李">
+                            </div>
+                            <div class="form-group">
+                                <label>物品说明</label>
+                                <textarea id="itemDescription" placeholder="描述物品的意义或特殊说明..." rows="3"></textarea>
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary">添加遗物</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="list-section">
+                        <h2>遗物清单</h2>
+                        <div class="filter-tabs">
+                            <button class="tab-btn active" data-category="all">全部</button>
+                            <button class="tab-btn" data-category="documents">证件</button>
+                            <button class="tab-btn" data-category="valuables">贵重物品</button>
+                            <button class="tab-btn" data-category="mementos">纪念品</button>
+                            <button class="tab-btn" data-category="electronics">电子产品</button>
+                        </div>
+                        <div id="belongingList" class="card-list">
+                            <!-- 动态生成的遗物列表 -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 葬礼规划 -->
+            <section id="funeral" class="page">
+                <div class="page-header">
+                    <h1>⚰️ 葬礼规划</h1>
+                    <p>提前安排，让告别从容有序</p>
+                </div>
+                
+                <div class="funeral-form">
+                    <form id="funeralForm">
+                        <div class="form-section-card">
+                            <h3>🎯 葬礼形式</h3>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="funeralType" value="traditional">
+                                    <span>传统葬礼</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="funeralType" value="cremation">
+                                    <span>火化仪式</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="funeralType" value="natural">
+                                    <span>生态安葬</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="funeralType" value="sea">
+                                    <span>海葬</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-section-card">
+                            <h3>🎵 仪式偏好</h3>
+                            <div class="form-group">
+                                <label>希望播放的音乐</label>
+                                <input type="text" id="funeralMusic" placeholder="例如：莫扎特的安魂曲">
+                            </div>
+                            <div class="form-group">
+                                <label>仪式氛围</label>
+                                <select id="funeralAtmosphere">
+                                    <option value="solemn">庄重肃穆</option>
+                                    <option value="warm">温馨感人</option>
+                                    <option value="celebration">庆祝生命</option>
+                                    <option value="simple">简单朴素</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-section-card">
+                            <h3>👥 参与人员</h3>
+                            <div class="form-group">
+                                <label>希望谁来主持</label>
+                                <input type="text" id="funeralHost" placeholder="例如：我的老友张先生">
+                            </div>
+                            <div class="form-group">
+                                <label>特别希望出席的人</label>
+                                <textarea id="funeralGuests" placeholder="列出您希望出席的亲友..." rows="3"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-section-card">
+                            <h3>💐 其他安排</h3>
+                            <div class="form-group">
+                                <label>穿着要求</label>
+                                <input type="text" id="funeralDress" placeholder="例如：请穿白色或浅色衣服">
+                            </div>
+                            <div class="form-group">
+                                <label>其他特殊要求</label>
+                                <textarea id="funeralSpecial" placeholder="任何其他要求或想法..." rows="3"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary btn-large">保存葬礼规划</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <!-- 告别信 -->
+            <section id="letters" class="page">
+                <div class="page-header">
+                    <h1>✉️ 告别信</h1>
+                    <p>给爱的人留下最后的话，传递爱与思念</p>
+                </div>
+                
+                <div class="content-grid">
+                    <div class="form-section">
+                        <h2>写告别信</h2>
+                        <form id="letterForm">
+                            <div class="form-group">
+                                <label>收信人</label>
+                                <input type="text" id="letterRecipient" placeholder="例如：我亲爱的女儿" required>
+                            </div>
+                            <div class="form-group">
+                                <label>信件标题</label>
+                                <input type="text" id="letterTitle" placeholder="例如：给妈妈的一封信">
+                            </div>
+                            <div class="form-group">
+                                <label>信件内容</label>
+                                <textarea id="letterContent" placeholder="写下您想对TA说的话..." rows="10" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>发送时机</label>
+                                <select id="letterTiming">
+                                    <option value="immediate">立即发送</option>
+                                    <option value="after-death">在我离世后发送</option>
+                                    <option value="specific-date">指定日期发送</option>
+                                </select>
+                            </div>
+                            <div class="form-group" id="specificDateGroup" style="display:none;">
+                                <label>指定日期</label>
+                                <input type="date" id="letterDate">
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn-primary">保存信件</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="list-section">
+                        <h2>我的告别信</h2>
+                        <div id="letterList" class="card-list">
+                            <!-- 动态生成的信件列表 -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 医疗预嘱 -->
+            <section id="medical" class="page">
+                <div class="page-header">
+                    <h1>🏥 医疗预嘱</h1>
+                    <p>提前表达医疗意愿，减轻家人决策负担</p>
+                </div>
+                
+                <div class="medical-form">
+                    <form id="medicalForm">
+                        <div class="form-section-card">
+                            <h3>💉 急救措施</h3>
+                            <div class="checkbox-group">
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="cpr" value="yes">
+                                    <span>在心跳停止时进行心肺复苏(CPR)</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="intubation" value="yes">
+                                    <span>使用呼吸机维持呼吸</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="feeding-tube" value="yes">
+                                    <span>使用鼻胃管或静脉营养</span>
+                                </label>
+                                <label class="checkbox-option">
+                                    <input type="checkbox" name="dialysis" value="yes">
+                                    <span>进行透析治疗</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-section-card">
+                            <h3>🩺 治疗偏好</h3>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="treatmentPreference" value="aggressive">
+                                    <span>积极治疗 - 尽一切可能延长生命</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="treatmentPreference" value="comfort">
+                                    <span>舒适护理 - 以减轻痛苦为主</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="treatmentPreference" value="limited">
+                                    <span>有限治疗 - 根据情况灵活决定</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-section-card">
+                            <h3>😊 临终关怀</h3>
+                            <div class="form-group">
+                                <label>希望在哪里度过最后时光</label>
+                                <select id="finalPlace">
+                                    <option value="hospital">医院</option>
+                                    <option value="home">家中</option>
+                                    <option value="hospice">临终关怀机构</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>疼痛管理</label>
+                                <select id="painManagement">
+                                    <option value="full">全力控制疼痛，即使可能缩短生命</option>
+                                    <option value="moderate">适度控制，平衡清醒和舒适</option>
+                                    <option value="minimal">最小化用药，保持清醒</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-section-card">
+                            <h3>👤 医疗代理人</h3>
+                            <div class="form-group">
+                                <label>指定医疗决策代理人</label>
+                                <input type="text" id="healthcareProxy" placeholder="姓名">
+                            </div>
+                            <div class="form-group">
+                                <label>代理人联系方式</label>
+                                <input type="text" id="proxyContact" placeholder="电话">
+                            </div>
+                        </div>
+
+                        <div class="form-section-card">
+                            <h3>📝 其他说明</h3>
+                            <div class="form-group">
+                                <label>其他医疗意愿或说明</label>
+                                <textarea id="medicalNotes" placeholder="任何其他需要说明的事项..." rows="4"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary btn-large">保存医疗预嘱</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <!-- 设置预期寿命模态框 -->
+        <div id="lifeModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>设置预期寿命</h2>
+                <form id="lifeForm">
+                    <div class="form-group">
+                        <label>您的出生日期</label>
+                        <input type="date" id="birthDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label>预期寿命（岁）</label>
+                        <input type="number" id="lifeExpectancy" min="1" max="150" value="80" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
