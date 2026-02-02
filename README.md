@@ -148,7 +148,7 @@ life-terminal-station/
 
 ### 在线体验
 直接访问已部署的演示站点：
-🔗 **https://你的用户名.github.io/life-terminal-station**
+🔗 **https://shizf12.github.io/life-terminal-station**
 
 ### 本地运行
 1. **克隆仓库**
@@ -302,7 +302,7 @@ life-terminal-station/
 
 ### 反馈与建议
 如果您有任何想法或建议，欢迎通过以下方式联系：
-- 🐛 [提交 Issue](https://github.com/你的用户名/life-terminal-station/issues)
+- 🐛 [提交 Issue](https://github.com/shizf12/life-terminal-station/issues)
 - 📧 发送邮件至：your-email@example.com
 - 💬 加入讨论区
 
@@ -370,6 +370,6 @@ furnished to do so, subject to the following conditions...
 
 ⭐ **如果这个项目对您有帮助，请给个 Star 支持一下！** ⭐
 
-[开始使用](#快速开始) · [查看演示](https://你的用户名.github.io/life-terminal-station) · [提交反馈](../../issues)
+[开始使用](#快速开始) · [查看演示](https://shizf12.github.io/life-terminal-station) · [提交反馈](../../issues)
 
 </div>
